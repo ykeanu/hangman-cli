@@ -11,47 +11,55 @@ function Hangman() {
 	this.word = new Word()
 }
 
-// Begins game and changes game state
+// Begins game and changes game state to runnig
 Hangman.prototype.startGame = function() {
 	this.isRunning = true;
-	this.word.generateData();
+	this.word.pinLetters();
 }
 
-
-Hangman.prototype.checkAnswer = function(answer) {
+// Determines if answer is correct or incorrect
+Hangman.prototype.testUserInput = function(answer) {
 	if(this.isRunning === true) {
-		this.guesses--;
 		if(this.word.letterArray.indexOf(answer.answer) !== -1) {
-			this.displayMessage = 'CORRECT!!!';
-			this.revealLetter(answer.answer);
+			this.terminalMessage = 'CORRECT!!!';
+			this.showLetter(answer.answer);
 		}
 		else if(this.word.letterArray.indexOf(answer.answer) === -1)
-			this.displayMessage = 'WRONG!!!';
-		this.word.stringLetters();
-		this.gameOverCheck();
+			this.terminalMessage = 'WRONG!!!';
+			this.guesses--;
+		this.word.combineLetters();
+		this.gameOver();
 	}
 }
 
-Hangman.prototype.revealLetter = function(answer) {
-	this.word.letterObjArray.forEach(function(letter){
+// Displays correct letters onto terminal
+Hangman.prototype.showLetter = function(answer) {
+	this.word.letterObjectArray.forEach(function(letter){
 		if (letter.letter.indexOf(answer) !== -1) 
-			letter.reveal();
+			letter.show();
 	})
 }
 
-Hangman.prototype.endGame = function() {
-	this.isRunning = false;
-}
 
-Hangman.prototype.gameOverCheck = function() {
+// Displays message if user runs out of guesses or successfuly completes word
+Hangman.prototype.gameOver = function() {
 	if(this.guesses <= 0){
-		this.displayMessage = 'You ran out of tries!  Would you like to try again? (y/n)'
+		this.terminalMessage = 
+			`You ran out of gueses!!! The answer was: 
+			${this.word.random}. Would you like to try again?`;
 		this.endGame();
 	}
 	else if(this.word.wordText.indexOf('_') === -1) {
-		this.displayMessage = 'Congratulations!!!  Would you like to play again (y/n)?'
+		this.terminalMessage = 
+			`Congratulations!!! You guessed the correct answer: 
+			${this.word.random}. Would you like to play again?`;
 		this.endGame();
 	}
+}
+
+// Changes game state to NOT running
+Hangman.prototype.endGame = function() {
+	this.isRunning = false;
 }
 
 // ==================== III. EXPORT TO app.js ====================

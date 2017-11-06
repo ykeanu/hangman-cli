@@ -16,6 +16,7 @@ function start() {
         message: "Would you like to play Hangman: EDM edition?",
         choices: ["YES", "NO"]
     }]).then(function(answer) {
+        //
         if (answer.letter === "YES") {
             game = new Hangman();
             game.startGame();
@@ -35,13 +36,14 @@ function userInput() {
         message: `Guess a letter! You have ${game.guesses} remaining...`,
         validate: userInputValidate
     }]).then(function(answer) {
-        game.checkAnswer(answer);
+        game.testUserInput(answer);
         ui.log.write(game.word.wordText);
-        console.log(game.displayMessage);
+        console.log(game.terminalMessage);
         if (game.isRunning) {
             userInput();
-        } else if (!game.isRunning)
+        } else if (!game.isRunning) {
             restart();
+        }
     })
 }
 
@@ -64,7 +66,7 @@ function restart() {
         if (answer.restart === "YES") {
             start();
         } else if (answer.restart === "NO") {
-            console.log('Thanks for playing!');
+            console.log('Thanks for playing Hangman!');
             process.exit();
         }
     })

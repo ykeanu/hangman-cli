@@ -3,12 +3,12 @@
 // Letter constructor function
 function Letter(letter) {
 	this.letter = letter;
-	this.display = '_';
+	this.placeHolder = '_';
 }
 
-// Displays letter
-Letter.prototype.reveal = function() {
-	this.display = this.letter;
+// Replaces placeholder with correct letter
+Letter.prototype.show = function() {
+	this.placeHolder = this.letter;
 }
 
 // ==================== II. EXPORT TO Word.js ====================

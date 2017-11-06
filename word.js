@@ -7,32 +7,37 @@ const Letter = require('./Letter.js');
 // Word constructor function
 function Word() {
 	this.wordBank = ["Diplo", "MuraMasa", "Porter", "Chainsmokers", "Zedd"];
-	this.random = this.wordBank[Math.floor(Math.random() * this.wordBank.length)].toLowerCase();
 	this.letterArray = [];
-	this.letterObjArray = [];
+	this.letterObjectArray = [];
 	this.wordText = '';
 }
 
-Word.prototype.generateWords = function() {
+// Retrieves random word for word bank and splits into array
+Word.prototype.randomWord = function() {
+	this.random = this.wordBank[Math.floor(Math.random() * this.wordBank.length)].toLowerCase();
 	this.letterArray = this.random.split('');
 }
 
-Word.prototype.createLetters = function() {
+// Creates a new letter object and pushes into array
+Word.prototype.letterObjects = function() {
 	this.letterArray.forEach(function(l){
 		let newLetter = new Letter(l);
-		this.letterObjArray.push(newLetter);
+		this.letterObjectArray.push(newLetter);
 	}.bind(this));
-	this.stringLetters();
+	this.combineLetters();
 }
 
-Word.prototype.generateData = function() {
-	this.generateWords();
-	this.createLetters();
+// Create letter arrays
+Word.prototype.pinLetters = function() {
+	this.randomWord();
+	this.letterObjects();
 }
 
-Word.prototype.stringLetters = function() {
-	this.wordText = this.letterObjArray.map(function(letter) {
-		return letter.display;
+// Converts array into a string to display on terminal
+Word.prototype.combineLetters = function() {
+	// ES6 map function
+	this.wordText = this.letterObjectArray.map(function(letter) {
+		return letter.placeHolder;
 	}).join(' ');
 }
 
