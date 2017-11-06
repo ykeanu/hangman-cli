@@ -11,7 +11,7 @@ function Hangman() {
 	this.word = new Word()
 }
 
-// Begins game and changes game state to runnig
+// Begins game and changes game state to running
 Hangman.prototype.startGame = function() {
 	this.isRunning = true;
 	this.word.pinLetters();
@@ -24,9 +24,10 @@ Hangman.prototype.testUserInput = function(answer) {
 			this.terminalMessage = 'CORRECT!!!';
 			this.showLetter(answer.answer);
 		}
-		else if(this.word.letterArray.indexOf(answer.answer) === -1)
+		else if(this.word.letterArray.indexOf(answer.answer) === -1) {
 			this.terminalMessage = 'WRONG!!!';
 			this.guesses--;
+		}
 		this.word.combineLetters();
 		this.gameOver();
 	}
@@ -35,24 +36,24 @@ Hangman.prototype.testUserInput = function(answer) {
 // Displays correct letters onto terminal
 Hangman.prototype.showLetter = function(answer) {
 	this.word.letterObjectArray.forEach(function(letter){
-		if (letter.letter.indexOf(answer) !== -1) 
+		if (letter.letter.indexOf(answer) !== -1) {
 			letter.show();
+		}
 	})
 }
 
-
 // Displays message if user runs out of guesses or successfuly completes word
 Hangman.prototype.gameOver = function() {
-	if(this.guesses <= 0){
+	if(this.guesses <= 0) {
 		this.terminalMessage = 
-			`You ran out of gueses!!! The answer was: 
-			${this.word.random}. Would you like to try again?`;
+			`Ran out of gueses!!! The answer was: 
+			${this.word.random}. Try again?`;
 		this.endGame();
 	}
 	else if(this.word.wordText.indexOf('_') === -1) {
 		this.terminalMessage = 
 			`Congratulations!!! You guessed the correct answer: 
-			${this.word.random}. Would you like to play again?`;
+			${this.word.random}. Play again?`;
 		this.endGame();
 	}
 }

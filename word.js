@@ -20,8 +20,8 @@ Word.prototype.randomWord = function() {
 
 // Creates a new letter object and pushes into array
 Word.prototype.letterObjects = function() {
-	this.letterArray.forEach(function(l){
-		let newLetter = new Letter(l);
+	this.letterArray.forEach(function(letter){
+		let newLetter = new Letter(letter);
 		this.letterObjectArray.push(newLetter);
 	}.bind(this));
 	this.combineLetters();
@@ -35,7 +35,7 @@ Word.prototype.pinLetters = function() {
 
 // Converts array into a string to display on terminal
 Word.prototype.combineLetters = function() {
-	// ES6 map function
+	// ES6 map funct
 	this.wordText = this.letterObjectArray.map(function(letter) {
 		return letter.placeHolder;
 	}).join(' ');
