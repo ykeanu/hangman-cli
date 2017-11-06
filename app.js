@@ -1,9 +1,9 @@
-// ==================== i. NODE PACKAGES && FILES ====================
+// ==================== I. NODE PACKAGES && FILE IMPORTS ====================
 
 const inquirer = require('inquirer');
 const Hangman = require('./Hangman.js');
 
-// ==================== ii. FUNCTIONS && DECLARATIONS ====================
+// ==================== II. FUNCTIONS && DECLARATIONS ====================
 
 const ui = new inquirer.ui.BottomBar();
 let game = {};
@@ -21,41 +21,51 @@ function start() {
             // game.startGame();
             userInput();
         } else if (answer.letter === "NO") {
-            console.log("Retype 'node app.js' if you want to play later!")
+            console.log("Retype 'node app.js' if you want to play later!");
+            process.exit();
         }
-    });
+    })
 }
 
 function userInput() {
-    inquirer.prompt([{
+    inquirer.prompt([
+    	{
             type: "input",
             name: "answer",
             message: `Guess a letter! You have ${game.guesses} remaining...`,
-            validate: validateAnswerFormat
-        }])
-        .then(answer => {
+            validate: validateUserInput
+        }
+        ]).then(function(answer) {
             game.checkAnswer(answer);
             ui.log.write(game.word.wordText);
             console.log(game.displayMessage);
-            if (game.isPlaying) {
+            if (game.isRunning) {
                 userGuess();
-            } else if (!game.isPlaying)
-                restartGame();
-        });
+            } else if (!game.isRunning)
+                restart();
+        })
 }
 
-function restartGame() {
-    inquirer
-        .prompt([{
-            type: 'input',
-            name: 'restart',
-            message: game.displayMessage,
-            validate: validateRestartFormat
-        }])
-        .then(answer => {
-            if (answer.restart.toLowerCase() === 'y')
-                startGame();
-            else if (answer.restart.toLowerCase() === 'n') {
+function validateUserInput(input) {
+    if (input.length === 1)
+        return true;
+    else
+        return "Please enter one character at a time.";
+}
+
+
+function restart() {
+    inquirer.prompt([
+    	{
+	        type: "list",
+	        name: "restart",
+	        message: "Do you want to restart?",
+	        choices: ["YES", "NO"]
+        }
+        ]).then(function(answer) {
+            if (answer.restart === "YES") {
+                start();
+            } else if (answer.restart === "NO") {
                 console.log('Thanks for playing!');
                 process.exit();
             }
@@ -63,21 +73,6 @@ function restartGame() {
 }
 
 
-function validateAnswerFormat(input) {
-    if (input.length === 1)
-        return true;
-    else
-        return 'You can only enter one character at a time';
-}
-
-
-function validateRestartFormat(input) {
-    if (input.toLowerCase() !== 'y' && input.toLowerCase() !== 'n')
-        return 'You must type y or n';
-    else
-        return true;
-}
-
-// ==================== iii. MAIN PROCESS ====================
+// ==================== III. MAIN PROCESS ====================
 
 start();
