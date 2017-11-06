@@ -1,14 +1,10 @@
 # Hangman: Command Line Edition
 Hangman-cli is a command-line application built with node and inquirer. This was built with the intention of modularizing logic.
 
-## Set Up Directions
-In the command line, type `npm install` to download node packages. Go to package.json file to view dependencies.
-- Optimized for Chrome for best viewing experience.
-
 ## Instructions
-1. Navigate to `hangman-cli` repository through the command line and execute `npm install` to download all of the various dependencies.
+1. Navigate to `hangman-cli` repository through the command line.
+2. Execute `npm install` to download all of the various dependencies.
 2. Using `node app.js`, the terminal will prompt instructions to begin the game.
-3. Guess one letter at a time to complete the word!
 
 ## Built With
 - Javascript
