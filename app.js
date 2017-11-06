@@ -1,7 +1,7 @@
 // ==================== I. NPM PACKAGES && IMPORTS ====================
 
 const inquirer = require('inquirer');
-const Hangman = require('./Hangman.js');
+const Hangman = require('./components/Hangman.js');
 
 // ==================== II. FUNCTIONS && DECLARATIONS ====================
 
@@ -34,7 +34,7 @@ function userInput() {
     inquirer.prompt([{
         type: "input",
         name: "answer",
-        message: `Guess a letter! You have ${game.guesses} remaining...`,
+        message: `Guess ONE letter! You have ${game.guesses} guesses remaining...`,
         validate: userInputValidate
     }]).then(function(answer) {
         game.testUserInput(answer);
