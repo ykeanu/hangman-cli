@@ -3,14 +3,14 @@
 // ==================== II. FUNCTIONS && DECLARATIONS ====================
 
 function Hangman() {
-	this.word = new word(),
+	this.gameState = false,
+	this.guesses = 12,
 	this.displayMessage = '';
-	this.guesses = guess,
 	this.word = new word(),
 }
 
 Hangman.prototype.startGame = function() {
-
+	this.gameState = true,
 }
 
 // ==================== III. MAIN PROCESS ====================
