@@ -1,5 +1,5 @@
 # Hangman: Command Line Edition
-Hangman-cli is a command-line application built with node and inquirer. This was built with the intention of modularizing logic.
+Hangman-cli is a command-line application built with node and inquirer. This was built with the intention of modularizing programming logic.
 
 ## Instructions
 1. Navigate to `hangman-cli` repository through the command line.
