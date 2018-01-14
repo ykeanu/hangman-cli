@@ -13,7 +13,7 @@ Hangman-cli is a command-line application built with node and inquirer. This was
 - Javascript
 - Node.js
 - Node Package Manager (npm)
-	- Inquirer
+	- Inquirer 
 
 ## Directory structure
 ```none            
